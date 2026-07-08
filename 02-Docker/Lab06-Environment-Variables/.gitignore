@@ -1,0 +1,34 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+
+# Virtual Environments
+venv/
+.venv/
+env/
+
+# IDE
+.idea/
+.vscode/
+
+# OS Files
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+
+# Environment Files
+.env
+
+# Keep env.list because it's part of the lab
+# env.list
+
+# Docker
+*.tar
+
+# Python packaging
+*.egg-info/
+dist/
+build/

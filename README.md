@@ -4,20 +4,11 @@
 
 **A hands-on portfolio of labs, assignments, and projects completed during the Cloud DevOps internship at iVolve Technologies.**
 
-![Progress](https://img.shields.io/badge/Progress-4%2F30_Labs-blue?style=flat-square)
+![Progress](https://img.shields.io/badge/Progress-6%2F30_Labs-blue?style=flat-square)
 ![Status](https://img.shields.io/badge/Status-In_Progress-success?style=flat-square)
 ![Focus](https://img.shields.io/badge/Focus-Cloud_%26_DevOps-orange?style=flat-square)
 ![Last Commit](https://img.shields.io/github/last-commit/WaleedDarwesh/ivolve-cloud-devops-internship?style=flat-square)
 ![Repo Size](https://img.shields.io/github/repo-size/WaleedDarwesh/ivolve-cloud-devops-internship?style=flat-square)
-[![License](https://img.shields.io/badge/License-MIT-green?style=flat-square)](LICENSE)
-
-<p>
-  <a href="#lab-catalog"><b>Labs</b></a> ·
-  <a href="#architecture--learning-path"><b>Architecture</b></a> ·
-  <a href="#current-progress"><b>Progress</b></a> ·
-  <a href="#skills-youll-gain"><b>Skills</b></a> ·
-  <a href="#contact"><b>Contact</b></a>
-</p>
 
 </div>
 
@@ -39,9 +30,7 @@
   - [04 · Jenkins (CI/CD)](#04--jenkins-cicd)
   - [05 · ArgoCD (GitOps)](#05--argocd-gitops)
   - [06 · Ansible](#06--ansible)
-- [Current Progress](#current-progress)
 - [What Each Lab Contains](#what-each-lab-contains)
-- [Learning Philosophy](#learning-philosophy)
 - [Purpose of This Repository](#purpose-of-this-repository)
 - [Contact](#contact)
 
@@ -105,7 +94,7 @@ Practical, portfolio-ready competencies developed across the program:
 |--------|--------|
 | **Foundations** | Linux administration · Shell scripting · Git & GitHub workflows |
 | **Build & Package** | Java build automation with Gradle & Maven · Artifact management |
-| **Containers** | Docker image optimization · Multi-stage builds · Networking · Docker Compose |
+| **Containers** | Docker image creation · Multi-stage builds · Environment variables · Volumes & Bind Mounts · Docker networking · Docker Compose |
 | **Orchestration** | Kubernetes workloads, storage, networking, RBAC & resource management |
 | **Automation & Delivery** | Jenkins CI/CD pipelines · GitOps with ArgoCD · Ansible configuration management |
 | **Cloud & Ops** | AWS deployment · Infrastructure automation · Troubleshooting real environments |
@@ -222,13 +211,13 @@ Status legend: ✅ Completed · 🚧 In Progress · ⬜ Planned
 
 | Lab | Title | Summary | Status |
 |:---:|-------|---------|:------:|
-| 03 | [Spring Boot Container](02-Docker/Lab03-SpringBoot-Container) | Containerize a Spring Boot app, building from source on a Maven + Java 17 base image. | ✅ |
-| 04 | [JAR Container](02-Docker/Lab04-JAR-Container) | Package a pre-built JAR on a slim Java 17 image and compare the resulting image size. | ✅ |
-| 05 | Multi-Stage Build | Split build and runtime into stages for a lean final image. | ⬜ |
-| 06 | Environment Variables | Inject `APP_MODE` / `APP_REGION` via CLI flags, an env-file, and the Dockerfile. | ⬜ |
-| 07 | Volumes & Bind Mounts | Run Nginx with a named volume for logs and a host bind mount for custom HTML. | ⬜ |
-| 08 | Custom Network | Connect frontend/backend microservices over a user-defined bridge network. | ⬜ |
-| 09 | Docker Compose | Orchestrate a Node.js + MySQL stack, expose health/readiness, and push to Docker Hub. | ⬜ |
+| 03 | [Spring Boot Container](02-Docker/Lab03-SpringBoot-Container) | Containerize a Spring Boot application by building it inside a Docker image using Maven and Java 17. | ✅ |
+| 04 | [JAR Runtime Container](02-Docker/Lab04-JAR-Container) | Package a pre-built Spring Boot executable JAR into a lightweight Java runtime image. | ✅ |
+| 05 | [Multi-Stage Docker Build](02-Docker/Lab05-MultiStage-Build) | Build a Spring Boot application using a multi-stage Dockerfile to separate build and runtime environments, producing a smaller and more secure image. | ✅ |
+| 06 | [Environment Variables](02-Docker/Lab06-Environment-Variables) | Configure Docker environment variables using runtime flags, environment files, and Dockerfile defaults while comparing their precedence. | ✅ |
+| 07 | Volumes & Bind Mounts | Persist container data using Docker volumes and bind mounts. | ⬜ |
+| 08 | Custom Network | Connect multiple containers using a user-defined Docker bridge network. | ⬜ |
+| 09 | Docker Compose | Deploy a multi-container application using Docker Compose. | ⬜ |
 
 <a id="03--kubernetes"></a>
 
@@ -280,18 +269,11 @@ Status legend: ✅ Completed · 🚧 In Progress · ⬜ Planned
 | 29 | Vault | Provision MySQL with an `ivolve` DB and user, securing secrets with Ansible Vault. | ⬜ |
 | 30 | Dynamic Inventory | Auto-discover tagged AWS EC2 hosts and run the MySQL role against them. | ⬜ |
 
----
 
-<a id="current-progress"></a>
-
-## 📈 Current Progress
-
-> 📅 **Last Updated:** July 2026
-
-**4 of 30 labs complete — 13.3%**
+**6 of 30 labs complete**
 
 ```text
-████░░░░░░░░░░░░░░░░░░░░░░░░░░░░  13.3%
+████████░░░░░░░░░░░░░░░░░░░░░░░░ 20%
 ```
 
 ---
@@ -307,14 +289,6 @@ Every lab is self-documenting and may include:
 - 🤖 Automation scripts (Bash, Ansible, pipelines)
 - 📷 Screenshots verifying the working result
 - 💡 Troubleshooting notes, best practices, and key takeaways
-
----
-
-<a id="learning-philosophy"></a>
-
-## 💡 Learning Philosophy
-
-Each lab focuses on understanding not only **how** a technology works, but **why** it is used in real-world DevOps workflows. Every implementation is accompanied by documentation, troubleshooting notes, and best practices — so the repository serves as both a record of progress and a practical reference I can return to.
 
 ---
 
