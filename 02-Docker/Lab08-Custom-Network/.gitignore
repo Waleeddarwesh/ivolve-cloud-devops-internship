@@ -1,0 +1,56 @@
+# ==========================
+# Operating System Files
+# ==========================
+.DS_Store
+Thumbs.db
+
+# ==========================
+# Editor & IDE
+# ==========================
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# ==========================
+# Python
+# ==========================
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+
+# Virtual Environments
+venv/
+.venv/
+env/
+
+# ==========================
+# Environment Variables
+# ==========================
+.env
+.env.*
+
+# ==========================
+# Docker
+# ==========================
+*.tar
+
+# ==========================
+# Logs
+# ==========================
+*.log
+
+# ==========================
+# Screenshots (optional)
+# Uncomment if screenshots should not be tracked
+# ==========================
+# Screenshots/*.png
+# Screenshots/*.jpg
+# Screenshots/*.jpeg
+
+# ==========================
+# Temporary Files
+# ==========================
+*.tmp
+*.bak

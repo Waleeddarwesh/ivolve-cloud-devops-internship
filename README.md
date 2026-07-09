@@ -4,7 +4,7 @@
 
 **A hands-on portfolio of labs, assignments, and projects completed during the Cloud DevOps internship at iVolve Technologies.**
 
-![Progress](https://img.shields.io/badge/Progress-6%2F30_Labs-blue?style=flat-square)
+![Progress](https://img.shields.io/badge/Progress-8%2F30_Labs-blue?style=flat-square)
 ![Status](https://img.shields.io/badge/Status-In_Progress-success?style=flat-square)
 ![Focus](https://img.shields.io/badge/Focus-Cloud_%26_DevOps-orange?style=flat-square)
 ![Last Commit](https://img.shields.io/github/last-commit/WaleedDarwesh/ivolve-cloud-devops-internship?style=flat-square)
@@ -94,7 +94,7 @@ Practical, portfolio-ready competencies developed across the program:
 |--------|--------|
 | **Foundations** | Linux administration · Shell scripting · Git & GitHub workflows |
 | **Build & Package** | Java build automation with Gradle & Maven · Artifact management |
-| **Containers** | Docker image creation · Multi-stage builds · Environment variables · Volumes & Bind Mounts · Docker networking · Docker Compose |
+| **Containers** | Docker image creation · Multi-stage builds · Environment variables · Volumes & Bind Mounts · Custom Docker networks · Docker Compose |
 | **Orchestration** | Kubernetes workloads, storage, networking, RBAC & resource management |
 | **Automation & Delivery** | Jenkins CI/CD pipelines · GitOps with ArgoCD · Ansible configuration management |
 | **Cloud & Ops** | AWS deployment · Infrastructure automation · Troubleshooting real environments |
@@ -215,8 +215,8 @@ Status legend: ✅ Completed · 🚧 In Progress · ⬜ Planned
 | 04 | [JAR Runtime Container](02-Docker/Lab04-JAR-Container) | Package a pre-built Spring Boot executable JAR into a lightweight Java runtime image. | ✅ |
 | 05 | [Multi-Stage Docker Build](02-Docker/Lab05-MultiStage-Build) | Build a Spring Boot application using a multi-stage Dockerfile to separate build and runtime environments, producing a smaller and more secure image. | ✅ |
 | 06 | [Environment Variables](02-Docker/Lab06-Environment-Variables) | Configure Docker environment variables using runtime flags, environment files, and Dockerfile defaults while comparing their precedence. | ✅ |
-| 07 | Volumes & Bind Mounts | Persist container data using Docker volumes and bind mounts. | ⬜ |
-| 08 | Custom Network | Connect multiple containers using a user-defined Docker bridge network. | ⬜ |
+| 07 | [Docker Volumes & Bind Mounts](02-Docker/Lab07-Volumes-BindMounts) | Persist Nginx logs using Docker volumes and serve custom web content from the host machine using bind mounts. | ✅ |
+| 08 | [Custom Docker Network](02-Docker/Lab08-Custom-Network) | Build frontend and backend microservices, connect them using a user-defined Docker bridge network, and verify container communication. | ✅ |
 | 09 | Docker Compose | Deploy a multi-container application using Docker Compose. | ⬜ |
 
 <a id="03--kubernetes"></a>
@@ -270,10 +270,10 @@ Status legend: ✅ Completed · 🚧 In Progress · ⬜ Planned
 | 30 | Dynamic Inventory | Auto-discover tagged AWS EC2 hosts and run the MySQL role against them. | ⬜ |
 
 
-**6 of 30 labs complete**
+**8 of 30 labs complete**
 
 ```text
-████████░░░░░░░░░░░░░░░░░░░░░░░░ 20%
+███████████░░░░░░░░░░░░░░░░░░░░░ 26.7%
 ```
 
 ---
