@@ -1,0 +1,32 @@
+version: "3.9"
+
+services:
+  app:
+    build: .
+    container_name: node-app
+
+    ports:
+      - "3000:3000"
+
+    env_file:
+      - .env
+
+    depends_on:
+      - db
+
+    volumes:
+      - app_logs:/app/logs
+
+  db:
+    image: mysql:8.0
+    container_name: mysql-db
+
+    env_file:
+      - .env
+
+    volumes:
+      - db_data:/var/lib/mysql
+
+volumes:
+  db_data:
+  app_logs:

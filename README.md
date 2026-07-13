@@ -4,7 +4,7 @@
 
 **A hands-on portfolio of labs, assignments, and projects completed during the Cloud DevOps internship at iVolve Technologies.**
 
-![Progress](https://img.shields.io/badge/Progress-8%2F30_Labs-blue?style=flat-square)
+![Progress](https://img.shields.io/badge/Progress-9%2F30_Labs-blue?style=flat-square)
 ![Status](https://img.shields.io/badge/Status-In_Progress-success?style=flat-square)
 ![Focus](https://img.shields.io/badge/Focus-Cloud_%26_DevOps-orange?style=flat-square)
 ![Last Commit](https://img.shields.io/github/last-commit/WaleedDarwesh/ivolve-cloud-devops-internship?style=flat-square)
@@ -74,7 +74,7 @@ The internship follows a progressive, project-based curriculum that builds skill
 | # | Track | What It Covers | Labs |
 |:-:|-------|----------------|:----:|
 | 01 | 🔨 **Build Tools** | Building & packaging Java applications with Gradle and Maven | 2 |
-| 02 | 🐳 **Docker** | Containerization, multi-stage builds, networking, volumes, and Compose | 7 |
+| 02 | 🐳 **Docker** | Containerization, image optimization, environment variables, storage, networking, and multi-container applications with Docker Compose.| 7 |
 | 03 | ☸️ **Kubernetes** | Container orchestration — workloads, storage, networking, and security | 11 |
 | 04 | ⚙️ **Jenkins** | CI/CD pipelines, agents, and shared libraries | 3 |
 | 05 | 🔄 **ArgoCD** | GitOps-driven continuous delivery workflows | 1 |
@@ -217,7 +217,7 @@ Status legend: ✅ Completed · 🚧 In Progress · ⬜ Planned
 | 06 | [Environment Variables](02-Docker/Lab06-Environment-Variables) | Configure Docker environment variables using runtime flags, environment files, and Dockerfile defaults while comparing their precedence. | ✅ |
 | 07 | [Docker Volumes & Bind Mounts](02-Docker/Lab07-Volumes-BindMounts) | Persist Nginx logs using Docker volumes and serve custom web content from the host machine using bind mounts. | ✅ |
 | 08 | [Custom Docker Network](02-Docker/Lab08-Custom-Network) | Build frontend and backend microservices, connect them using a user-defined Docker bridge network, and verify container communication. | ✅ |
-| 09 | Docker Compose | Deploy a multi-container application using Docker Compose. | ⬜ |
+| 09 | [Docker Compose](02-Docker/Lab09-Docker-Compose) | Deploy a multi-container Node.js and MySQL application using Docker Compose, environment variables, persistent volumes, and Docker Hub. | ✅ |
 
 <a id="03--kubernetes"></a>
 
@@ -270,10 +270,10 @@ Status legend: ✅ Completed · 🚧 In Progress · ⬜ Planned
 | 30 | Dynamic Inventory | Auto-discover tagged AWS EC2 hosts and run the MySQL role against them. | ⬜ |
 
 
-**8 of 30 labs complete**
+**9 of 30 labs complete**
 
 ```text
-███████████░░░░░░░░░░░░░░░░░░░░░ 26.7%
+████████████░░░░░░░░░░░░░░░░░░░░ 30.0%
 ```
 
 ---

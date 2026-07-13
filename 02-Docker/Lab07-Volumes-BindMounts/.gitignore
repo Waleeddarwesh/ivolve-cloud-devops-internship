@@ -34,14 +34,6 @@ __pycache__/
 *.log
 
 # ==========================
-# Screenshots (optional)
-# Uncomment if screenshots should not be tracked
-# ==========================
-# Screenshots/*.png
-# Screenshots/*.jpg
-# Screenshots/*.jpeg
-
-# ==========================
 # Temporary Files
 # ==========================
 *.tmp
