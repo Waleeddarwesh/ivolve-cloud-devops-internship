@@ -4,7 +4,7 @@
 
 **A hands-on portfolio of labs, assignments, and projects completed during the Cloud DevOps internship at iVolve Technologies.**
 
-![Progress](https://img.shields.io/badge/Progress-9%2F30_Labs-blue?style=flat-square)
+![Progress](https://img.shields.io/badge/Progress-11%2F30_Labs-blue?style=flat-square)
 ![Status](https://img.shields.io/badge/Status-In_Progress-success?style=flat-square)
 ![Focus](https://img.shields.io/badge/Focus-Cloud_%26_DevOps-orange?style=flat-square)
 ![Last Commit](https://img.shields.io/github/last-commit/WaleedDarwesh/ivolve-cloud-devops-internship?style=flat-square)
@@ -225,8 +225,8 @@ Status legend: ✅ Completed · 🚧 In Progress · ⬜ Planned
 
 | Lab | Title | Summary | Status |
 |:---:|-------|---------|:------:|
-| 10 | Taints & Tolerations | Isolate a node with a `node=worker:NoSchedule` taint. | ⬜ |
-| 11 | Namespaces & Resource Quotas | Create the `ivolve` namespace and cap it to two pods via a ResourceQuota. | ⬜ |
+| 10 | [Node Isolation Using Taints](03-Kubernetes/Lab10-Taints) | Create a two-node Kubernetes cluster, isolate the worker node using the `node=worker:NoSchedule` taint, and verify scheduling constraints with `kubectl describe`. | ✅ |
+| 11 | [Namespace Management & Resource Quota Enforcement](03-Kubernetes/Lab11-Namespaces) | Create the `ivolve` namespace, apply a `ResourceQuota` limiting the namespace to **2 Pods**, and verify namespace resource governance. | ✅ |
 | 12 | ConfigMaps & Secrets | Externalize MySQL config and base64-encoded credentials. | ⬜ |
 | 13 | Persistent Volumes & PVCs | Provision a 1Gi `hostPath` PV with `ReadWriteMany` and a matching PVC. | ⬜ |
 | 14 | StatefulSet + Headless Service | Run MySQL as a StatefulSet with persistent storage and a headless service. | ⬜ |
@@ -270,10 +270,10 @@ Status legend: ✅ Completed · 🚧 In Progress · ⬜ Planned
 | 30 | Dynamic Inventory | Auto-discover tagged AWS EC2 hosts and run the MySQL role against them. | ⬜ |
 
 
-**9 of 30 labs complete**
+**11 of 30 labs complete**
 
 ```text
-████████████░░░░░░░░░░░░░░░░░░░░ 30.0%
+███████████████░░░░░░░░░░░░░░░░░ 36.7%
 ```
 
 ---

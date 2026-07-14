@@ -136,8 +136,10 @@ services:
     ports:
       - "3000:3000"
 
-    env_file:
-      - .env
+    environment:
+      DB_HOST: ${DB_HOST}
+      DB_USER: ${DB_USER}
+      DB_PASSWORD: ${DB_PASSWORD}
 
     depends_on:
       - db
@@ -149,8 +151,9 @@ services:
     image: mysql:8.0
     container_name: mysql-db
 
-    env_file:
-      - .env
+    environment:
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+      MYSQL_DATABASE: ${MYSQL_DATABASE}
 
     volumes:
       - db_data:/var/lib/mysql
@@ -159,7 +162,7 @@ volumes:
   db_data:
   app_logs:
 ```
-
+> **Note:** Docker Compose automatically reads variables from the `.env` file located in the same directory as `docker-compose.yml`. By mapping only the required variables using the `environment` section, each container receives only the environment variables it needs instead of the entire `.env` file.
 ---
 
 ## ▶️ Build and Run the Application
