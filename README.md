@@ -4,7 +4,7 @@
 
 **A hands-on portfolio of labs, assignments, and projects completed during the Cloud DevOps internship at iVolve Technologies.**
 
-![Progress](https://img.shields.io/badge/Progress-11%2F30_Labs-blue?style=flat-square)
+![Progress](https://img.shields.io/badge/Progress-13%2F30_Labs-blue?style=flat-square)
 ![Status](https://img.shields.io/badge/Status-In_Progress-success?style=flat-square)
 ![Focus](https://img.shields.io/badge/Focus-Cloud_%26_DevOps-orange?style=flat-square)
 ![Last Commit](https://img.shields.io/github/last-commit/WaleedDarwesh/ivolve-cloud-devops-internship?style=flat-square)
@@ -75,7 +75,7 @@ The internship follows a progressive, project-based curriculum that builds skill
 |:-:|-------|----------------|:----:|
 | 01 | 🔨 **Build Tools** | Building & packaging Java applications with Gradle and Maven | 2 |
 | 02 | 🐳 **Docker** | Containerization, image optimization, environment variables, storage, networking, and multi-container applications with Docker Compose.| 7 |
-| 03 | ☸️ **Kubernetes** | Container orchestration — workloads, storage, networking, and security | 11 |
+| 03 | ☸️ **Kubernetes** | Container orchestration, scheduling, storage, networking, configuration management, and security | 11 |
 | 04 | ⚙️ **Jenkins** | CI/CD pipelines, agents, and shared libraries | 3 |
 | 05 | 🔄 **ArgoCD** | GitOps-driven continuous delivery workflows | 1 |
 | 06 | 🤖 **Ansible** | Linux automation and configuration management | 5 |
@@ -95,7 +95,7 @@ Practical, portfolio-ready competencies developed across the program:
 | **Foundations** | Linux administration · Shell scripting · Git & GitHub workflows |
 | **Build & Package** | Java build automation with Gradle & Maven · Artifact management |
 | **Containers** | Docker image creation · Multi-stage builds · Environment variables · Volumes & Bind Mounts · Custom Docker networks · Docker Compose |
-| **Orchestration** | Kubernetes workloads, storage, networking, RBAC & resource management |
+| **Orchestration** | Kubernetes workloads · Scheduling · ConfigMaps & Secrets · Persistent Storage · Networking · RBAC · Resource Management |
 | **Automation & Delivery** | Jenkins CI/CD pipelines · GitOps with ArgoCD · Ansible configuration management |
 | **Cloud & Ops** | AWS deployment · Infrastructure automation · Troubleshooting real environments |
 
@@ -227,8 +227,8 @@ Status legend: ✅ Completed · 🚧 In Progress · ⬜ Planned
 |:---:|-------|---------|:------:|
 | 10 | [Node Isolation Using Taints](03-Kubernetes/Lab10-Taints) | Create a two-node Kubernetes cluster, isolate the worker node using the `node=worker:NoSchedule` taint, and verify scheduling constraints with `kubectl describe`. | ✅ |
 | 11 | [Namespace Management & Resource Quota Enforcement](03-Kubernetes/Lab11-Namespaces) | Create the `ivolve` namespace, apply a `ResourceQuota` limiting the namespace to **2 Pods**, and verify namespace resource governance. | ✅ |
-| 12 | ConfigMaps & Secrets | Externalize MySQL config and base64-encoded credentials. | ⬜ |
-| 13 | Persistent Volumes & PVCs | Provision a 1Gi `hostPath` PV with `ReadWriteMany` and a matching PVC. | ⬜ |
+| 12 | [ConfigMaps & Secrets](03-Kubernetes/Lab12-ConfigMaps-Secrets) | Manage application configuration using ConfigMaps and securely store MySQL credentials in Kubernetes Secrets with Base64-encoded values. | ✅ |
+| 13 | [Persistent Volumes](03-Kubernetes/Lab13-Persistent-Volumes) | Configure a 1Gi Persistent Volume using `hostPath`, create a matching Persistent Volume Claim with `ReadWriteMany`, and verify successful volume binding. | ✅ |
 | 14 | StatefulSet + Headless Service | Run MySQL as a StatefulSet with persistent storage and a headless service. | ⬜ |
 | 15 | Deployment + ClusterIP Service | Deploy a Node.js app with config/secret env vars behind a ClusterIP service. | ⬜ |
 | 16 | Init Containers | Bootstrap the `ivolve` database and app user before the app starts. | ⬜ |
@@ -270,10 +270,10 @@ Status legend: ✅ Completed · 🚧 In Progress · ⬜ Planned
 | 30 | Dynamic Inventory | Auto-discover tagged AWS EC2 hosts and run the MySQL role against them. | ⬜ |
 
 
-**11 of 30 labs complete**
+**13 of 30 labs complete**
 
 ```text
-███████████████░░░░░░░░░░░░░░░░░ 36.7%
+█████████████████░░░░░░░░░░░░░░░ 43.3%
 ```
 
 ---
@@ -298,7 +298,7 @@ Every lab is self-documenting and may include:
 
 This repository serves as:
 
-- 📚 A personal **knowledge base** for Cloud & DevOps.
+- 📚 A structured knowledge base covering modern Cloud and DevOps practices.
 - 💼 A professional **portfolio** of hands-on work.
 - 🚀 A living record of my **internship journey**.
 - 📖 A **reference** for future projects and implementations.
