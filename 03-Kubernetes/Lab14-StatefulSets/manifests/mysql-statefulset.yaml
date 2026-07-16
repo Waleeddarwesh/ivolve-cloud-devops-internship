@@ -16,31 +16,55 @@ spec:
         app: mysql
 
     spec:
+      nodeSelector:
+        node: worker
+
       tolerations:
-      - key: node
-        operator: Equal
-        value: worker
-        effect: NoSchedule
+        - key: node
+          operator: Equal
+          value: worker
+          effect: NoSchedule
 
       containers:
-      - name: mysql
-        image: mysql:8.0
+        - name: mysql
+          image: mysql:8.0
 
-        env:
-        - name: MYSQL_ROOT_PASSWORD
-          valueFrom:
-            secretKeyRef:
-              name: mysql-secret
-              key: MYSQL_ROOT_PASSWORD
+          ports:
+            - containerPort: 3306
 
-        volumeMounts:
-        - name: mysql-storage
-          mountPath: /var/lib/mysql
+          env:
+            - name: MYSQL_ROOT_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: mysql-secret
+                  key: MYSQL_ROOT_PASSWORD
 
-        ports:
-        - containerPort: 3306
+            - name: DB_HOST
+              valueFrom:
+                configMapKeyRef:
+                  name: mysql-config
+                  key: DB_HOST
+
+            - name: MYSQL_DATABASE
+              value: ivolve
+
+            - name: MYSQL_USER
+              valueFrom:
+                configMapKeyRef:
+                  name: mysql-config
+                  key: DB_USER
+
+            - name: MYSQL_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: mysql-secret
+                  key: DB_PASSWORD
+
+          volumeMounts:
+            - name: mysql-storage
+              mountPath: /var/lib/mysql
 
       volumes:
-      - name: mysql-storage
-        persistentVolumeClaim:
-          claimName: app-logs-pvc
+        - name: mysql-storage
+          persistentVolumeClaim:
+            claimName: app-logs-pvc

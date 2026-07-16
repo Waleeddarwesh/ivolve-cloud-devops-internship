@@ -4,11 +4,11 @@
 
 Unlike Deployments, which are designed for stateless applications, **StatefulSets** are used to manage applications that require **stable identities, persistent storage, and ordered deployment**. Databases such as MySQL, PostgreSQL, MongoDB, and Cassandra are common examples of stateful workloads.
 
-In this lab, a **MySQL StatefulSet** is deployed with a single replica. The database securely consumes its root password from a Kubernetes **Secret**, stores its data using a **Persistent Volume Claim (PVC)**, and includes a **Toleration** allowing it to be scheduled on a tainted worker node.
+In this lab, a **MySQL StatefulSet** is deployed with a single replica. The database securely consumes its configuration from Kubernetes **ConfigMaps** and **Secrets**, automatically creates the **ivolve** database and a non-root **ivolve** user during initialization, stores its data using a **Persistent Volume Claim (PVC)**, and includes a **Node Selector** and **Toleration** to schedule the Pod on the tainted worker node.
 
 A **Headless Service** is also created to provide stable DNS records for the StatefulSet Pods, enabling reliable communication between stateful applications.
 
-Finally, the MySQL database is verified by connecting with a MySQL client and confirming that it is running correctly.
+Finally, the MySQL database is verified by connecting with the **ivolve** user and confirming that the database is operational.
 
 ---
 
@@ -17,9 +17,10 @@ Finally, the MySQL database is verified by connecting with a MySQL client and co
 - Understand Kubernetes StatefulSets.
 - Deploy MySQL using a StatefulSet.
 - Create a Headless Service.
-- Consume sensitive configuration from Kubernetes Secrets.
+- Consume configuration from Kubernetes ConfigMaps and Secrets.
+- Automatically initialize a MySQL database and application user.
+- Configure both a Node Selector and Toleration for scheduling.
 - Mount persistent storage using a Persistent Volume Claim.
-- Configure Pod tolerations for tainted nodes.
 - Verify stable networking provided by a Headless Service.
 - Confirm the MySQL database is operational.
 
@@ -49,6 +50,7 @@ Lab14-StatefulSet/
 - StatefulSet
 - Headless Service
 - Persistent Volume Claim (PVC)
+- ConfigMaps
 - Kubernetes Secrets
 - MySQL
 - Minikube
@@ -143,27 +145,35 @@ Headless Services are commonly used with:
 
 ---
 
-# 📖 Understanding Pod Tolerations
+# 📖 Understanding Pod Scheduling
 
-In Lab 10, the worker node was configured with the taint:
+In **Lab 10**, a dedicated worker node was configured with the following taint:
 
 ```text
 node=worker:NoSchedule
 ```
 
-Normally, Pods cannot be scheduled onto that node.
+Pods are **not scheduled** onto this node unless they explicitly tolerate the taint.
 
-By adding a matching **Toleration**, Kubernetes allows the StatefulSet Pod to run on the tainted worker node.
+In this lab, the StatefulSet uses both a **Node Selector** and a **Toleration**:
+
+- **Node Selector** targets the worker node by matching its label.
+- **Toleration** allows the Pod to be scheduled onto the tainted node.
 
 Example:
 
 ```yaml
+nodeSelector:
+  node: worker
+
 tolerations:
-- key: node
-  operator: Equal
-  value: worker
-  effect: NoSchedule
+  - key: node
+    operator: Equal
+    value: worker
+    effect: NoSchedule
 ```
+
+Using both ensures that the Pod is scheduled **only** on the intended worker node, providing greater control over workload placement.
 
 ---
 
@@ -218,11 +228,15 @@ Create `mysql-statefulset.yaml`
 
 The StatefulSet should include:
 
-- One replica
-- MySQL container
+- One MySQL replica
+- Headless Service
+- Persistent Volume Claim
 - Root password from Secret
-- PVC mounted to `/var/lib/mysql`
-- Toleration for `node=worker:NoSchedule`
+- Database user from ConfigMap
+- User password from Secret
+- Automatic database initialization
+- Node Selector
+- Toleration
 
 Example:
 
@@ -245,34 +259,58 @@ spec:
         app: mysql
 
     spec:
+      nodeSelector:
+        node: worker
+
       tolerations:
-      - key: node
-        operator: Equal
-        value: worker
-        effect: NoSchedule
+        - key: node
+          operator: Equal
+          value: worker
+          effect: NoSchedule
 
       containers:
-      - name: mysql
-        image: mysql:8.0
+        - name: mysql
+          image: mysql:8.0
 
-        env:
-        - name: MYSQL_ROOT_PASSWORD
-          valueFrom:
-            secretKeyRef:
-              name: mysql-secret
-              key: MYSQL_ROOT_PASSWORD
+          ports:
+            - containerPort: 3306
 
-        volumeMounts:
-        - name: mysql-storage
-          mountPath: /var/lib/mysql
+          env:
+            - name: MYSQL_ROOT_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: mysql-secret
+                  key: MYSQL_ROOT_PASSWORD
 
-        ports:
-        - containerPort: 3306
+            - name: DB_HOST
+              valueFrom:
+                configMapKeyRef:
+                  name: mysql-config
+                  key: DB_HOST
+
+            - name: MYSQL_DATABASE
+              value: ivolve
+
+            - name: MYSQL_USER
+              valueFrom:
+                configMapKeyRef:
+                  name: mysql-config
+                  key: DB_USER
+
+            - name: MYSQL_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: mysql-secret
+                  key: DB_PASSWORD
+
+          volumeMounts:
+            - name: mysql-storage
+              mountPath: /var/lib/mysql
 
       volumes:
-      - name: mysql-storage
-        persistentVolumeClaim:
-          claimName: app-logs-pvc
+        - name: mysql-storage
+          persistentVolumeClaim:
+            claimName: app-logs-pvc
 ```
 
 ---
@@ -356,17 +394,16 @@ Notice that the **Cluster-IP** is **None**, confirming the Service is headless.
 Execute a shell inside the Pod:
 
 ```bash
-kubectl exec -it mysql-0 -- bash
+kubectl exec -it mysql-0 -- mysql -u ivolve -p
 ```
 
-Connect using the MySQL client:
+Enter the password defined by the `DB_PASSWORD` key in the `mysql-secret` Secret.
 
-```bash
-mysql -u root -p
-```
+The MySQL Docker image automatically creates the database and user during the first initialization when the following variables are provided:
 
-Enter the root password stored in the Secret.
-
+- MYSQL_DATABASE
+- MYSQL_USER
+- MYSQL_PASSWORD
 Verify the connection:
 
 ```sql
@@ -376,11 +413,13 @@ SHOW DATABASES;
 Expected Output
 
 ```text
-Database
-information_schema
-mysql
-performance_schema
-sys
++--------------------+
+| Database           |
++--------------------+
+| information_schema |
+| ivolve             |
+| performance_schema |
++--------------------+
 ```
 
 This confirms the database is operational.
@@ -438,7 +477,7 @@ kubectl describe pod mysql-0
 Verify the database:
 
 ```bash
-mysql -u root -p
+kubectl exec -it mysql-0 -- mysql -u ivolve -p
 ```
 
 Expected:
