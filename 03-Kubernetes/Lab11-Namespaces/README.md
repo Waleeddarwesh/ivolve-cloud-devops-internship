@@ -222,6 +222,8 @@ The output should confirm that the namespace is limited to **2 Pods**.
 
 ## 🧹 Cleanup
 
+> **Note:** Skip this section if you are continuing to the next lab, as the resources created here are required in subsequent labs. 
+
 Delete the ResourceQuota:
 
 ```bash

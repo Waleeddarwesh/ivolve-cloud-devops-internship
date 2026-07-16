@@ -4,7 +4,7 @@
 
 **A hands-on portfolio of labs, assignments, and projects completed during the Cloud DevOps internship at iVolve Technologies.**
 
-![Progress](https://img.shields.io/badge/Progress-13%2F30_Labs-blue?style=flat-square)
+![Progress](https://img.shields.io/badge/Progress-14%2F30_Labs-blue?style=flat-square)
 ![Status](https://img.shields.io/badge/Status-In_Progress-success?style=flat-square)
 ![Focus](https://img.shields.io/badge/Focus-Cloud_%26_DevOps-orange?style=flat-square)
 ![Last Commit](https://img.shields.io/github/last-commit/WaleedDarwesh/ivolve-cloud-devops-internship?style=flat-square)
@@ -229,7 +229,7 @@ Status legend: ✅ Completed · 🚧 In Progress · ⬜ Planned
 | 11 | [Namespace Management & Resource Quota Enforcement](03-Kubernetes/Lab11-Namespaces) | Create the `ivolve` namespace, apply a `ResourceQuota` limiting the namespace to **2 Pods**, and verify namespace resource governance. | ✅ |
 | 12 | [ConfigMaps & Secrets](03-Kubernetes/Lab12-ConfigMaps-Secrets) | Manage application configuration using ConfigMaps and securely store MySQL credentials in Kubernetes Secrets with Base64-encoded values. | ✅ |
 | 13 | [Persistent Volumes](03-Kubernetes/Lab13-Persistent-Volumes) | Configure a 1Gi Persistent Volume using `hostPath`, create a matching Persistent Volume Claim with `ReadWriteMany`, and verify successful volume binding. | ✅ |
-| 14 | StatefulSet + Headless Service | Run MySQL as a StatefulSet with persistent storage and a headless service. | ⬜ |
+| 14 | [StatefulSet + Headless Service](03-Kubernetes/Lab14-StatefulSets) | Deploy MySQL as a Kubernetes StatefulSet with persistent storage, ConfigMaps, Secrets, PersistentVolumeClaims, and a Headless Service to provide stable network identities and durable storage for stateful workloads. | ✅ |
 | 15 | Deployment + ClusterIP Service | Deploy a Node.js app with config/secret env vars behind a ClusterIP service. | ⬜ |
 | 16 | Init Containers | Bootstrap the `ivolve` database and app user before the app starts. | ⬜ |
 | 17 | Resource Requests & Limits | Set CPU/memory requests and limits and verify with `describe` / `top`. | ⬜ |
@@ -270,10 +270,10 @@ Status legend: ✅ Completed · 🚧 In Progress · ⬜ Planned
 | 30 | Dynamic Inventory | Auto-discover tagged AWS EC2 hosts and run the MySQL role against them. | ⬜ |
 
 
-**13 of 30 labs complete**
+**14 of 30 labs complete**
 
 ```text
-█████████████████░░░░░░░░░░░░░░░ 43.3%
+███████████████████░░░░░░░░░░░░░ 46.7%
 ```
 
 ---

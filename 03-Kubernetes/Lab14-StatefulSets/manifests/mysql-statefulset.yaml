@@ -1,0 +1,46 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: mysql
+spec:
+  serviceName: mysql
+  replicas: 1
+
+  selector:
+    matchLabels:
+      app: mysql
+
+  template:
+    metadata:
+      labels:
+        app: mysql
+
+    spec:
+      tolerations:
+      - key: node
+        operator: Equal
+        value: worker
+        effect: NoSchedule
+
+      containers:
+      - name: mysql
+        image: mysql:8.0
+
+        env:
+        - name: MYSQL_ROOT_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: mysql-secret
+              key: MYSQL_ROOT_PASSWORD
+
+        volumeMounts:
+        - name: mysql-storage
+          mountPath: /var/lib/mysql
+
+        ports:
+        - containerPort: 3306
+
+      volumes:
+      - name: mysql-storage
+        persistentVolumeClaim:
+          claimName: app-logs-pvc

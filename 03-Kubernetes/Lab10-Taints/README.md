@@ -240,6 +240,8 @@ Taints are commonly used to:
 
 ## 🧹 Cleanup
 
+> **Note:** Skip this section if you are continuing to the next lab, as the resources created here are required in subsequent labs. 
+
 Remove the taint:
 
 ```bash

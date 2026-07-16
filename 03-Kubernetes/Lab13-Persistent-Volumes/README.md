@@ -291,6 +291,8 @@ Persistent Volumes are commonly used for:
 
 ## 🧹 Cleanup
 
+> **Note:** Skip this section if you are continuing to the next lab, as the resources created here are required in subsequent labs. 
+
 Delete the Persistent Volume Claim:
 
 ```bash
