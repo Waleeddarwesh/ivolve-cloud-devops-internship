@@ -4,7 +4,7 @@
 
 **A hands-on portfolio of labs, assignments, and projects completed during the Cloud DevOps internship at iVolve Technologies.**
 
-![Progress](https://img.shields.io/badge/Progress-14%2F30_Labs-blue?style=flat-square)
+![Progress](https://img.shields.io/badge/Progress-16%2F30_Labs-blue?style=flat-square)
 ![Status](https://img.shields.io/badge/Status-In_Progress-success?style=flat-square)
 ![Focus](https://img.shields.io/badge/Focus-Cloud_%26_DevOps-orange?style=flat-square)
 ![Last Commit](https://img.shields.io/github/last-commit/WaleedDarwesh/ivolve-cloud-devops-internship?style=flat-square)
@@ -162,6 +162,7 @@ ivolve-cloud-devops-internship/
 │   ├── Lab14-StatefulSets/
 │   ├── Lab15-Deployments/
 │   ├── Lab16-Init-Containers/
+│   ├── Lab16+Exposing-Application/
 │   ├── Lab17-Resource-Management/
 │   ├── Lab18-Network-Policies/
 │   ├── Lab19-DaemonSets/
@@ -230,8 +231,9 @@ Status legend: ✅ Completed · 🚧 In Progress · ⬜ Planned
 | 12 | [ConfigMaps & Secrets](03-Kubernetes/Lab12-ConfigMaps-Secrets) | Manage application configuration using ConfigMaps and securely store MySQL credentials in Kubernetes Secrets with Base64-encoded values. | ✅ |
 | 13 | [Persistent Volumes](03-Kubernetes/Lab13-Persistent-Volumes) | Configure a 1Gi Persistent Volume using `hostPath`, create a matching Persistent Volume Claim with `ReadWriteMany`, and verify successful volume binding. | ✅ |
 | 14 | [StatefulSet + Headless Service](03-Kubernetes/Lab14-StatefulSets) | Deploy MySQL as a Kubernetes StatefulSet with persistent storage, ConfigMaps, Secrets, PersistentVolumeClaims, and a Headless Service to provide stable network identities and durable storage for stateful workloads. | ✅ |
-| 15 | Deployment + ClusterIP Service | Deploy a Node.js app with config/secret env vars behind a ClusterIP service. | ⬜ |
-| 16 | Init Containers | Bootstrap the `ivolve` database and app user before the app starts. | ⬜ |
+| 15 | [Deployment + ClusterIP Service](03-Kubernetes/Lab15-Deployments) | Deploy a Node.js app with config/secret env vars behind a ClusterIP service. | ✅ |
+| 16 | [Init Containers](03-Kubernetes/Lab16-Init-Containers) | Bootstrap the `ivolve` database and app user before the app starts. | ✅ |
+| 16+ | [Exposing Applications](03-Kubernetes/Lab16+Exposing-Application) | Expose the application using NodePort and Ingress, then verify external access. | ✅ |
 | 17 | Resource Requests & Limits | Set CPU/memory requests and limits and verify with `describe` / `top`. | ⬜ |
 | 18 | Network Policies | Restrict ingress to MySQL (port 3306) to the application pods only. | ⬜ |
 | 19 | DaemonSets | Roll out Prometheus `node-exporter` on every node, tolerating all taints. | ⬜ |
@@ -270,10 +272,10 @@ Status legend: ✅ Completed · 🚧 In Progress · ⬜ Planned
 | 30 | Dynamic Inventory | Auto-discover tagged AWS EC2 hosts and run the MySQL role against them. | ⬜ |
 
 
-**14 of 30 labs complete**
+**16 of 30 labs complete**
 
 ```text
-███████████████████░░░░░░░░░░░░░ 46.7%
+█████████████████████░░░░░░░░░░░ 53.3%
 ```
 
 ---

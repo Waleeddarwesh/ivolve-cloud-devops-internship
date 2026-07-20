@@ -1,0 +1,98 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nodejs-app
+  namespace: ivolve
+
+spec:
+  replicas: 2
+
+  selector:
+    matchLabels:
+      app: nodejs-app
+
+  template:
+    metadata:
+      labels:
+        app: nodejs-app
+
+    spec:
+      nodeSelector:
+        node: worker
+
+      tolerations:
+        - key: node
+          operator: Equal
+          value: worker
+          effect: NoSchedule
+
+      initContainers:
+        - name: create-db
+          image: mysql:8.0
+          env:
+            - name: DB_HOST
+              valueFrom:
+                configMapKeyRef:
+                  name: mysql-config
+                  key: DB_HOST
+            - name: MYSQL_ROOT_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: mysql-secret
+                  key: MYSQL_ROOT_PASSWORD
+          resources:
+            requests:
+              cpu: 100m
+              memory: 128Mi
+            limits:
+              cpu: 200m
+              memory: 256Mi
+          command:
+            - sh
+            - -c
+            - |
+              mysql -h "$DB_HOST" -uroot -p"$MYSQL_ROOT_PASSWORD" \
+              -e "CREATE DATABASE IF NOT EXISTS ivolve;"
+
+      containers:
+        - name: nodejs-app
+          image: waleeddarwesh/nodejs-compose-app:latest
+
+          ports:
+            - containerPort: 3000
+
+          env:
+            - name: DB_HOST
+              valueFrom:
+                configMapKeyRef:
+                  name: mysql-config
+                  key: DB_HOST
+
+            - name: DB_USER
+              valueFrom:
+                configMapKeyRef:
+                  name: mysql-config
+                  key: DB_USER
+
+            - name: DB_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: mysql-secret
+                  key: DB_PASSWORD
+
+          resources:
+            requests:
+              cpu: 250m
+              memory: 256Mi
+            limits:
+              cpu: 500m
+              memory: 512Mi
+
+          volumeMounts:
+            - name: app-storage
+              mountPath: /app/storage
+
+      volumes:
+        - name: app-storage
+          persistentVolumeClaim:
+            claimName: app-logs-pvc

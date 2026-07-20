@@ -149,6 +149,7 @@ apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
   name: app-logs-pvc
+  namespace: ivolve
 spec:
   storageClassName: ""
   accessModes:
@@ -188,7 +189,7 @@ persistentvolume/app-logs-pv created
 Run:
 
 ```bash
-kubectl apply -f manifests/persistent-volume-claim.yaml
+kubectl apply -f manifests/persistent-volume-claim.yaml -n ivolve
 ```
 
 Expected Output
@@ -217,7 +218,7 @@ app-logs-pv   1Gi        RWX            Bound
 Verify the PVC:
 
 ```bash
-kubectl get pvc
+kubectl get pvc -n ivolve
 ```
 
 Expected Output
@@ -255,14 +256,14 @@ kubectl describe pv app-logs-pv
 Verify the Persistent Volume Claim:
 
 ```bash
-kubectl describe pvc app-logs-pvc
+kubectl describe pvc app-logs-pvc -n ivolve
 ```
 
 List storage resources:
 
 ```bash
 kubectl get pv
-kubectl get pvc
+kubectl get pvc -n ivolve
 ```
 
 Expected:
@@ -296,7 +297,7 @@ Persistent Volumes are commonly used for:
 Delete the Persistent Volume Claim:
 
 ```bash
-kubectl delete pvc app-logs-pvc
+kubectl delete pvc app-logs-pvc -n ivolve
 ```
 
 Delete the Persistent Volume:

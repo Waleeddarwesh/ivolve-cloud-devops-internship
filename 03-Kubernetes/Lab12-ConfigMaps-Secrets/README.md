@@ -135,6 +135,7 @@ apiVersion: v1
 kind: ConfigMap
 metadata:
   name: mysql-config
+  namespace: ivolve
 data:
   DB_HOST: mysql
   DB_USER: ivolve
@@ -182,6 +183,7 @@ apiVersion: v1
 kind: Secret
 metadata:
   name: mysql-secret
+  namespace: ivolve
 type: Opaque
 data:
   DB_PASSWORD: bXlwYXNzd29yZA==
@@ -203,7 +205,7 @@ Manifest Breakdown
 Run:
 
 ```bash
-kubectl apply -f manifests/configmap.yaml
+kubectl apply -f manifests/configmap.yaml -n ivolve
 ```
 
 Expected Output
@@ -219,7 +221,7 @@ configmap/mysql-config created
 Run:
 
 ```bash
-kubectl apply -f manifests/secret.yaml
+kubectl apply -f manifests/secret.yaml -n ivolve
 ```
 
 Expected Output
@@ -235,7 +237,7 @@ secret/mysql-secret created
 Verify the ConfigMap:
 
 ```bash
-kubectl get configmaps
+kubectl get configmaps -n ivolve
 ```
 
 Expected Output
@@ -248,7 +250,7 @@ mysql-config     2
 Verify the Secret:
 
 ```bash
-kubectl get secrets
+kubectl get secrets -n ivolve
 ```
 
 Expected Output
@@ -277,20 +279,20 @@ mysql-secret     Opaque
 Verify the ConfigMap:
 
 ```bash
-kubectl describe configmap mysql-config
+kubectl describe configmap mysql-config -n ivolve
 ```
 
 Verify the Secret:
 
 ```bash
-kubectl describe secret mysql-secret
+kubectl describe secret mysql-secret -n ivolve
 ```
 
 List all resources:
 
 ```bash
-kubectl get configmaps
-kubectl get secrets
+kubectl get configmaps -n ivolve
+kubectl get secrets -n ivolve
 ```
 
 Expected:
@@ -328,13 +330,13 @@ Secrets are commonly used to:
 Delete the ConfigMap:
 
 ```bash
-kubectl delete configmap mysql-config
+kubectl delete configmap mysql-config -n ivolve
 ```
 
 Delete the Secret:
 
 ```bash
-kubectl delete secret mysql-secret
+kubectl delete secret mysql-secret -n ivolve
 ```
 
 ---

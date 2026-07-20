@@ -204,6 +204,7 @@ apiVersion: v1
 kind: Service
 metadata:
   name: mysql
+  namespace: ivolve
 spec:
   clusterIP: None
   selector:
@@ -245,6 +246,7 @@ apiVersion: apps/v1
 kind: StatefulSet
 metadata:
   name: mysql
+  namespace: ivolve
 spec:
   serviceName: mysql
   replicas: 1
@@ -318,7 +320,7 @@ spec:
 ### 3. Apply the Headless Service
 
 ```bash
-kubectl apply -f manifests/headless-service.yaml
+kubectl apply -f manifests/headless-service.yaml -n ivolve
 ```
 
 Expected Output
@@ -332,7 +334,7 @@ service/mysql created
 ### 4. Apply the StatefulSet
 
 ```bash
-kubectl apply -f manifests/mysql-statefulset.yaml
+kubectl apply -f manifests/mysql-statefulset.yaml -n ivolve
 ```
 
 Expected Output
@@ -346,7 +348,7 @@ statefulset.apps/mysql created
 ### 5. Verify the StatefulSet
 
 ```bash
-kubectl get statefulsets
+kubectl get statefulsets -n ivolve
 ```
 
 Expected Output
@@ -361,7 +363,7 @@ mysql   1/1
 ### 6. Verify the Pod
 
 ```bash
-kubectl get pods
+kubectl get pods -n ivolve
 ```
 
 Expected Output
@@ -375,7 +377,7 @@ mysql-0   Running
 ### 7. Verify the Headless Service
 
 ```bash
-kubectl get svc
+kubectl get svc -n ivolve
 ```
 
 Expected Output
@@ -394,7 +396,7 @@ Notice that the **Cluster-IP** is **None**, confirming the Service is headless.
 Execute a shell inside the Pod:
 
 ```bash
-kubectl exec -it mysql-0 -- mysql -u ivolve -p
+kubectl exec -it mysql-0 -n ivolve -- mysql -u ivolve -p
 ```
 
 Enter the password defined by the `DB_PASSWORD` key in the `mysql-secret` Secret.
@@ -453,31 +455,31 @@ Examples of StatefulSet workloads:
 Verify the StatefulSet:
 
 ```bash
-kubectl get statefulset
+kubectl get statefulset -n ivolve
 ```
 
 Verify the Pods:
 
 ```bash
-kubectl get pods
+kubectl get pods -n ivolve
 ```
 
 Verify the Service:
 
 ```bash
-kubectl get svc
+kubectl get svc -n ivolve
 ```
 
 Verify the mounted PVC:
 
 ```bash
-kubectl describe pod mysql-0
+kubectl describe pod mysql-0 -n ivolve
 ```
 
 Verify the database:
 
 ```bash
-kubectl exec -it mysql-0 -- mysql -u ivolve -p
+kubectl exec -it mysql-0 -n ivolve -- mysql -u ivolve -p
 ```
 
 Expected:
@@ -514,13 +516,13 @@ StatefulSets are commonly used for:
 Delete the StatefulSet:
 
 ```bash
-kubectl delete statefulset mysql
+kubectl delete statefulset mysql -n ivolve
 ```
 
 Delete the Headless Service:
 
 ```bash
-kubectl delete service mysql
+kubectl delete service mysql -n ivolve
 ```
 
 > **Note:** The Persistent Volume Claim and Persistent Volume are not deleted automatically, ensuring that the database data remains available even after the StatefulSet is removed.
