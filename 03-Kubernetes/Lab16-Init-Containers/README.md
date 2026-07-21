@@ -251,6 +251,9 @@ spec:
         app: nodejs-app
 
     spec:
+      imagePullSecrets:
+        - name: dockerhub-secret
+
       nodeSelector:
         node: worker
 

@@ -4,7 +4,7 @@
 
 Kubernetes **Deployments** provide a declarative way to manage stateless applications by handling Pod creation, scaling, updates, and self-healing. Unlike StatefulSets, Deployments are ideal for applications that do not require persistent identities.
 
-In this lab, a **Node.js application** is deployed using a Kubernetes **Deployment** with **2 replicas**. However, due to a **ResourceQuota** applied to the namespace, only **one Pod** can be scheduled while the second remains in the **Pending** state. The application uses a **custom Docker image** hosted on Docker Hub, consumes configuration from **ConfigMaps** and **Secrets**, mounts a previously created **Persistent Volume Claim (PVC)** for persistent storage, and is scheduled onto the tainted worker node using a **Node Selector** and **Toleration**.
+In this lab, a **Node.js application** is deployed using a Kubernetes **Deployment** with **2 replicas**. However, due to a **ResourceQuota** applied to the namespace, only **one Pod** can be scheduled while the second remains in the **Pending** state. The application uses a **private Docker image** hosted on **Docker Hub**. Kubernetes authenticates to Docker Hub using an **imagePullSecret** before pulling the image. The application also consumes configuration from **ConfigMaps** and **Secrets**, mounts a previously created **Persistent Volume Claim (PVC)** for persistent storage, and is scheduled onto the tainted worker node using a **Node Selector** and **Toleration**.
 
 Finally, the application is exposed internally using a **ClusterIP Service**, allowing other Pods within the cluster to communicate with the application through a stable virtual IP and DNS name.
 
@@ -13,6 +13,7 @@ Finally, the application is exposed internally using a **ClusterIP Service**, al
 ## 🎯 Objectives
 
 - Understand Kubernetes Deployments.
+- Authenticate Kubernetes to pull images from a private Docker Hub repository using imagePullSecrets.
 - Deploy a Node.js application using a custom Docker image.
 - Configure application settings using ConfigMaps and Secrets.
 - Mount persistent storage using an existing Persistent Volume Claim.
@@ -21,13 +22,13 @@ Finally, the application is exposed internally using a **ClusterIP Service**, al
 - Verify Pod deployment and Service connectivity.
 
 ---
-
 ## 📂 Project Structure
 
 ```text
 Lab15-NodeJS-Deployment/
 │
 ├── manifests/
+│   ├── docker-registry-secret.example.yaml
 │   ├── deployment.yaml
 │   └── clusterip-service.yaml
 │
@@ -48,6 +49,7 @@ Lab15-NodeJS-Deployment/
 - Persistent Volume Claim (PVC)
 - ConfigMaps
 - Kubernetes Secrets
+- ImagePullSecrets
 - Docker Hub
 - Node.js
 - Minikube
@@ -215,6 +217,40 @@ The application consumes these values as environment variables.
 
 ---
 
+# 📖 Understanding ImagePullSecrets
+
+When a container image is stored in a **private container registry**, Kubernetes must authenticate before it can pull the image.
+
+Kubernetes stores registry credentials as a Secret of type:
+
+```text
+kubernetes.io/dockerconfigjson
+```
+
+This Secret is referenced by the Pod using the `imagePullSecrets` field.
+
+Authentication flow:
+
+```text
+Pod
+ │
+ ▼
+imagePullSecret
+ │
+ ▼
+Docker Hub
+ │
+ ▼
+Private Image
+ │
+ ▼
+Container Starts
+```
+
+Using an imagePullSecret keeps registry credentials separate from application manifests and allows Kubernetes to securely pull private container images.
+
+---
+
 # 📖 Understanding Persistent Storage
 
 Although Node.js applications are generally stateless, they sometimes require persistent storage for:
@@ -261,7 +297,55 @@ The Deployment continuously attempts to create the missing replica, but scheduli
 
 ## 📋 Lab Requirements
 
-### 1. Create the Deployment
+### 1. Create the Docker Registry Secret
+
+Since the application image is stored in a **private Docker Hub repository**, Kubernetes must authenticate with Docker Hub before it can pull the image.
+
+Create a Docker registry Secret:
+
+```bash
+kubectl create secret docker-registry dockerhub-secret \
+  --docker-server=https://index.docker.io/v1/ \
+  --docker-username=<DOCKERHUB_USERNAME> \
+  --docker-password=<DOCKERHUB_ACCESS_TOKEN> \
+  --docker-email=<EMAIL> \
+  -n ivolve \
+  --dry-run=client -o yaml > ./manifests/docker-registry-secret.yaml
+```
+> **Note:** It is recommended to use a **Docker Hub Personal Access Token (PAT)** instead of your Docker Hub account password.
+
+Apply the Secret:
+
+```bash
+kubectl apply -f manifests/docker-registry-secret.yaml
+```
+
+Expected Output
+
+```text
+secret/dockerhub-secret created
+```
+
+
+
+Verify that the Secret was created successfully:
+
+```bash
+kubectl get secrets -n ivolve
+```
+
+Expected Output:
+
+```text
+NAME                TYPE                             DATA   AGE
+dockerhub-secret    kubernetes.io/dockerconfigjson   1      10s
+```
+
+The Deployment will reference this Secret using the `imagePullSecrets` field to authenticate with Docker Hub when pulling the private container image.
+
+---
+
+### 2. Create the Deployment
 
 Create `deployment.yaml`
 
@@ -269,6 +353,7 @@ The Deployment should include:
 
 - Deployment named **nodejs-app**
 - 2 replicas
+- Docker registry imagePullSecret
 - Custom Docker Hub image
 - ConfigMap environment variables
 - Secret environment variables
@@ -298,6 +383,9 @@ spec:
         app: nodejs-app
 
     spec:
+      imagePullSecrets:
+        - name: dockerhub-secret
+
       nodeSelector:
         node: worker
 
@@ -353,7 +441,7 @@ spec:
 
 ---
 
-### 2. Create the ClusterIP Service
+### 3. Create the ClusterIP Service
 
 Create `clusterip-service.yaml`
 
@@ -387,7 +475,7 @@ Manifest Breakdown
 
 ---
 
-### 3. Apply the Deployment
+### 4. Apply the Deployment
 
 ```bash
 kubectl apply -f manifests/deployment.yaml -n ivolve
@@ -401,7 +489,7 @@ deployment.apps/nodejs-app created
 
 ---
 
-### 4. Apply the Service
+### 5. Apply the Service
 
 ```bash
 kubectl apply -f manifests/clusterip-service.yaml -n ivolve
@@ -413,9 +501,22 @@ Expected Output
 service/nodejs-service created
 ```
 
----
+--- 
 
-### 5. Verify the Deployment
+### 6. Verify the Docker Registry Secret
+
+```bash
+kubectl get secret dockerhub-secret -n ivolve
+```
+
+Expected Output
+
+```text
+NAME               TYPE                             DATA   AGE
+dockerhub-secret   kubernetes.io/dockerconfigjson   1      15m
+```
+---
+### 7. Verify the Deployment
 
 ```bash
 kubectl get deployments -n ivolve
@@ -432,7 +533,7 @@ nodejs-app   1/2
 
 ---
 
-### 6. Verify the Pods
+### 8. Verify the Pods
 
 ```bash
 kubectl get pods -n ivolve
@@ -448,7 +549,7 @@ nodejs-app-xxxxxxxxxxx        1/1     Running
 
 ---
 
-### 7. Verify the ClusterIP Service
+### 9. Verify the ClusterIP Service
 
 ```bash
 kubectl get svc -n ivolve
@@ -464,7 +565,7 @@ nodejs-service   ClusterIP   10.xxx.xxx.xx   <none>        80/TCP
 
 ---
 
-### 8. Verify Environment Variables
+### 10. Verify Environment Variables
 
 ```bash
 kubectl exec -it <running-pod> -n ivolve -- printenv
@@ -477,7 +578,7 @@ Verify that the Pod contains values loaded from:
 
 ---
 
-### 9. Verify the Mounted Storage
+### 11. Verify the Mounted Storage
 
 ```bash
 kubectl describe pod <running-pod> -n ivolve
@@ -603,6 +704,8 @@ After completing this lab, you will be able to:
 
 - Understand Kubernetes Deployments.
 - Deploy stateless applications.
+- Authenticate Kubernetes with private Docker registries.
+- Configure imagePullSecrets.
 - Use custom Docker Hub images.
 - Consume ConfigMaps and Secrets.
 - Configure ClusterIP Services.
@@ -615,6 +718,7 @@ After completing this lab, you will be able to:
 ## 💡 Best Practices
 
 - Use Deployments for stateless workloads.
+- Store private registry credentials in Kubernetes Secrets and reference them through imagePullSecrets.
 - Store sensitive information in Kubernetes Secrets.
 - Keep application configuration in ConfigMaps.
 - Use Services instead of connecting directly to Pods.
@@ -627,4 +731,4 @@ After completing this lab, you will be able to:
 
 ## ✅ Result
 
-Successfully deployed a **Node.js application** using a **Deployment** with a custom Docker Hub image, configured the application using **ConfigMaps** and **Secrets**, mounted a **Persistent Volume Claim** for persistent storage, scheduled the Pod onto the tainted worker node using a **Node Selector** and **Toleration**, exposed the application internally through a **ClusterIP Service**, and observed how a **ResourceQuota** limits the number of running replicas within the namespace.
+Successfully deployed a **Node.js application** from a **private Docker Hub repository** by authenticating Kubernetes with an **imagePullSecret**, configured the application using **ConfigMaps** and **Secrets**, mounted a **Persistent Volume Claim** for persistent storage, scheduled the Pod onto the tainted worker node using a **Node Selector** and **Toleration**, exposed the application internally through a **ClusterIP Service**, and observed how a **ResourceQuota** limits the number of running replicas within the namespace.
