@@ -282,6 +282,8 @@ Network Policies are commonly used for:
 
 ## 🧹 Cleanup
 
+> **Note:** Skip this section if you are continuing to the next lab.
+
 Delete the Network Policy:
 ```bash
 kubectl delete networkpolicy allow-app-to-mysql -n ivolve

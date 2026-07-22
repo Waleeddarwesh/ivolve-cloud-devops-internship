@@ -4,7 +4,7 @@
 
 **A hands-on portfolio of labs, assignments, and projects completed during the Cloud DevOps internship at iVolve Technologies.**
 
-![Progress](https://img.shields.io/badge/Progress-18%2F30_Labs-blue?style=flat-square)
+![Progress](https://img.shields.io/badge/Progress-20%2F30_Labs-blue?style=flat-square)
 ![Status](https://img.shields.io/badge/Status-In_Progress-success?style=flat-square)
 ![Focus](https://img.shields.io/badge/Focus-Cloud_%26_DevOps-orange?style=flat-square)
 ![Last Commit](https://img.shields.io/github/last-commit/WaleedDarwesh/ivolve-cloud-devops-internship?style=flat-square)
@@ -166,7 +166,8 @@ ivolve-cloud-devops-internship/
 │   ├── Lab17-Resource-Management/
 │   ├── Lab18-Network-Policies/
 │   ├── Lab19-DaemonSets/
-│   └── Lab20-RBAC/
+│   ├── Lab20-RBAC/
+│   └── Lab20+Full Monitoring Stack With RBAC/
 │
 ├── 04-Jenkins/
 │   ├── Lab21-Role-Based-Authorization/
@@ -236,8 +237,9 @@ Status legend: ✅ Completed · 🚧 In Progress · ⬜ Planned
 | 16+ | [Exposing Applications](03-Kubernetes/Lab16+Exposing-Application) | Expose the application using NodePort and Ingress, then verify external access. | ✅ |
 | 17 | [Resource Management](03-Kubernetes/Lab17-Resource-Management) | Set CPU/memory requests and limits and verify with `describe` / `top`. | ✅ |
 | 18 | [Network Policies](03-Kubernetes/Lab18-Network-Policies) | Restrict ingress to MySQL (port 3306) to the application pods only. | ✅ |
-| 19 | DaemonSets | Roll out Prometheus `node-exporter` on every node, tolerating all taints. | ⬜ |
-| 20 | RBAC & Service Accounts | Grant a `jenkins-sa` account read-only access to pods via Role + RoleBinding. | ⬜ |
+| 19 | [DaemonSets](03-Kubernetes/Lab19-DaemonSets) | Roll out Prometheus `node-exporter` on every node, tolerating all taints. | ✅ |
+| 20 | [RBAC & Service Accounts](03-Kubernetes/Lab20-RBAC) | Grant a `jenkins-sa` account read-only access to pods via Role + RoleBinding. | ✅ |
+| 20+ | [Full Monitoring Stack With RBAC](03-Kubernetes/Lab20+Full%20Monitoring%20Stack%20With%20RBAC) | Deploy a complete Prometheus and Grafana monitoring stack scraping Node Exporter, secured by RBAC. | ✅ |
 
 <a id="04--jenkins-cicd"></a>
 
@@ -272,10 +274,10 @@ Status legend: ✅ Completed · 🚧 In Progress · ⬜ Planned
 | 30 | Dynamic Inventory | Auto-discover tagged AWS EC2 hosts and run the MySQL role against them. | ⬜ |
 
 
-**18 of 30 labs complete**
+**20 of 30 labs complete**
 
 ```text
-██████████████████░░░░░░░░░░░░ 60.0%
+████████████████████░░░░░░░░░░ 66.6%
 ```
 
 ---
