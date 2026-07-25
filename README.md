@@ -4,7 +4,7 @@
 
 **A hands-on portfolio of labs, assignments, and projects completed during the Cloud DevOps internship at iVolve Technologies.**
 
-![Progress](https://img.shields.io/badge/Progress-20%2F30_Labs-blue?style=flat-square)
+![Progress](https://img.shields.io/badge/Progress-22%2F30_Labs-blue?style=flat-square)
 ![Status](https://img.shields.io/badge/Status-In_Progress-success?style=flat-square)
 ![Focus](https://img.shields.io/badge/Focus-Cloud_%26_DevOps-orange?style=flat-square)
 ![Last Commit](https://img.shields.io/github/last-commit/WaleedDarwesh/ivolve-cloud-devops-internship?style=flat-square)
@@ -247,8 +247,8 @@ Status legend: ✅ Completed · 🚧 In Progress · ⬜ Planned
 
 | Lab | Title | Summary | Status |
 |:---:|-------|---------|:------:|
-| 21 | Role-Based Authorization | Configure admin and read-only users with Jenkins RBAC. | ⬜ |
-| 22 | CI/CD Pipeline | Test → build → image → push → update manifest → deploy to Kubernetes, with post actions. | ⬜ |
+| 21 | [Role-Based Authorization](04-Jenkins/Lab21-Role-Based-Authorization) | Configure admin and read-only users with Jenkins RBAC. | ✅ |
+| 22 | [CI/CD Pipeline](04-Jenkins/Lab22-CI-CD-Pipeline) | Test → build → image → push → update manifest → deploy to Kubernetes, with post actions. | ✅ |
 | 23 | Agents & Shared Libraries | Reuse pipeline logic across jobs via a shared library on a Jenkins agent. | ⬜ |
 
 <a id="05--argocd-gitops"></a>
@@ -274,10 +274,10 @@ Status legend: ✅ Completed · 🚧 In Progress · ⬜ Planned
 | 30 | Dynamic Inventory | Auto-discover tagged AWS EC2 hosts and run the MySQL role against them. | ⬜ |
 
 
-**20 of 30 labs complete**
+**22 of 30 labs complete**
 
 ```text
-████████████████████░░░░░░░░░░ 66.6%
+██████████████████████░░░░░░░░ 73.3%
 ```
 
 ---

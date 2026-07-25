@@ -1,0 +1,136 @@
+pipeline {
+    agent any
+
+    environment {
+        PROJECT_DIR = '04-Jenkins/Lab22-CI-CD-Pipeline'
+
+        DOCKER_HUB_USER = 'waleeddarwesh'
+        IMAGE_NAME = "${DOCKER_HUB_USER}/jenkins-app"
+        IMAGE_TAG = "${BUILD_NUMBER}"
+
+        // Jenkins Credentials IDs
+        DOCKER_CREDENTIALS_ID = 'dockerhub'
+        KUBECONFIG_CREDENTIALS_ID = 'kubeconfig'
+    }
+
+    stages {
+
+        stage('Run Unit Test') {
+            steps {
+                dir("${PROJECT_DIR}") {
+                    echo 'Running Maven Unit Tests...'
+                    sh 'mvn test'
+                }
+            }
+        }
+
+        stage('Build App') {
+            steps {
+                dir("${PROJECT_DIR}") {
+                    echo 'Compiling and Packaging the Application...'
+                    sh 'mvn clean package -DskipTests'
+                }
+            }
+        }
+
+        stage('Build Docker Image') {
+            steps {
+                dir("${PROJECT_DIR}") {
+                    echo "Building Docker image: ${IMAGE_NAME}:${IMAGE_TAG}"
+
+                    sh """
+                        docker build -t ${IMAGE_NAME}:${IMAGE_TAG} .
+                        docker tag ${IMAGE_NAME}:${IMAGE_TAG} ${IMAGE_NAME}:latest
+                    """
+                }
+            }
+        }
+
+        stage('Push Image to Docker Hub') {
+            steps {
+
+                withCredentials([
+                    usernamePassword(
+                        credentialsId: DOCKER_CREDENTIALS_ID,
+                        usernameVariable: 'DOCKER_USER',
+                        passwordVariable: 'DOCKER_PASS'
+                    )
+                ]) {
+
+                    dir("${PROJECT_DIR}") {
+                        echo 'Authenticating and pushing image to Docker Hub...'
+
+                        sh """
+                            echo "\$DOCKER_PASS" | docker login -u "\$DOCKER_USER" --password-stdin
+
+                            docker push ${IMAGE_NAME}:${IMAGE_TAG}
+                            docker push ${IMAGE_NAME}:latest
+                        """
+                    }
+                }
+            }
+        }
+
+        stage('Delete Image Locally') {
+            steps {
+                dir("${PROJECT_DIR}") {
+                    echo 'Removing local Docker images...'
+
+                    sh """
+                        docker rmi ${IMAGE_NAME}:${IMAGE_TAG} || true
+                        docker rmi ${IMAGE_NAME}:latest || true
+                    """
+                }
+            }
+        }
+
+        stage('Update Deployment Manifest') {
+            steps {
+                dir("${PROJECT_DIR}") {
+                    echo 'Updating deployment manifest with the new image...'
+
+                    sh """
+                        sed -i 's|image: .*|image: ${IMAGE_NAME}:${IMAGE_TAG}|g' manifests/deployment.yaml
+                    """
+                }
+            }
+        }
+
+        stage('Deploy to Kubernetes') {
+            steps {
+
+                withCredentials([
+                    file(
+                        credentialsId: KUBECONFIG_CREDENTIALS_ID,
+                        variable: 'KUBECONFIG'
+                    )
+                ]) {
+
+                    dir("${PROJECT_DIR}") {
+                        echo 'Deploying application to Kubernetes...'
+
+                        sh """
+                            kubectl apply -f manifests/deployment.yaml --kubeconfig=\$KUBECONFIG
+                        """
+                    }
+                }
+            }
+        }
+    }
+
+    post {
+
+        always {
+            echo 'Pipeline execution completed.'
+            sh 'docker logout || true'
+        }
+
+        success {
+            echo 'Application deployed successfully.'
+        }
+
+        failure {
+            echo 'Pipeline execution failed.'
+        }
+    }
+}

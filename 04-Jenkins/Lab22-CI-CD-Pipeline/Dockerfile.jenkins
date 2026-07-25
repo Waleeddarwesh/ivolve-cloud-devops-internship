@@ -1,0 +1,26 @@
+FROM jenkins/jenkins:lts
+
+# Switch to root to install packages
+USER root
+
+# Update and install Maven, Docker CLI, and prerequisites
+RUN apt-get update && \
+    apt-get install -y \
+    maven \
+    docker.io \
+    curl \
+    apt-transport-https \
+    ca-certificates \
+    gnupg
+
+# Download and install the latest stable kubectl
+RUN curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl" && \
+    chmod +x kubectl && \
+    mv kubectl /usr/local/bin/
+
+# Ensure the jenkins user has permission to use docker
+# The docker socket will be mounted from the host at runtime
+RUN usermod -aG docker jenkins || true
+
+# Switch back to the jenkins user
+USER jenkins
