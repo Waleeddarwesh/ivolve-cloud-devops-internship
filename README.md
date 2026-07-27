@@ -4,7 +4,7 @@
 
 **A hands-on portfolio of labs, assignments, and projects completed during the Cloud DevOps internship at iVolve Technologies.**
 
-![Progress](https://img.shields.io/badge/Progress-22%2F30_Labs-blue?style=flat-square)
+![Progress](https://img.shields.io/badge/Progress-23%2F30_Labs-blue?style=flat-square)
 ![Status](https://img.shields.io/badge/Status-In_Progress-success?style=flat-square)
 ![Focus](https://img.shields.io/badge/Focus-Cloud_%26_DevOps-orange?style=flat-square)
 ![Last Commit](https://img.shields.io/github/last-commit/WaleedDarwesh/ivolve-cloud-devops-internship?style=flat-square)
@@ -172,7 +172,7 @@ ivolve-cloud-devops-internship/
 ├── 04-Jenkins/
 │   ├── Lab21-Role-Based-Authorization/
 │   ├── Lab22-CI-CD-Pipeline/
-│   └── Lab23-Shared-Libraries/
+│   └── Lab23-Jenkins-Shared-Library/
 │
 ├── 05-ArgoCD/
 │   └── Lab25-GitOps-Workflow/
@@ -202,7 +202,7 @@ Status legend: ✅ Completed · 🚧 In Progress · ⬜ Planned
 
 ### 01 · Build Tools
 
-| Lab | Title | Summary | Status |
+| Lab | Title <img width=250/> | Summary <img width=550/> | Status |
 |:---:|-------|---------|:------:|
 | 01 | [Gradle](01-Build-Tools/Lab01-Gradle) | Build & package a Java calculator app with Gradle → `build/libs/calculator.jar`. | ✅ |
 | 02 | [Maven](01-Build-Tools/Lab02-Maven) | Build & package a Java calculator app with Maven → `target/calculator.jar`. | ✅ |
@@ -211,7 +211,7 @@ Status legend: ✅ Completed · 🚧 In Progress · ⬜ Planned
 
 ### 02 · Docker
 
-| Lab | Title | Summary | Status |
+| Lab | Title <img width=250/> | Summary <img width=550/> | Status |
 |:---:|-------|---------|:------:|
 | 03 | [Spring Boot Container](02-Docker/Lab03-SpringBoot-Container) | Containerize a Spring Boot application by building it inside a Docker image using Maven and Java 17. | ✅ |
 | 04 | [JAR Runtime Container](02-Docker/Lab04-JAR-Container) | Package a pre-built Spring Boot executable JAR into a lightweight Java runtime image. | ✅ |
@@ -225,7 +225,7 @@ Status legend: ✅ Completed · 🚧 In Progress · ⬜ Planned
 
 ### 03 · Kubernetes
 
-| Lab | Title | Summary | Status |
+| Lab | Title <img width=250/> | Summary <img width=550/> | Status |
 |:---:|-------|---------|:------:|
 | 10 | [Node Isolation Using Taints](03-Kubernetes/Lab10-Taints) | Create a two-node Kubernetes cluster, isolate the worker node using the `node=worker:NoSchedule` taint, and verify scheduling constraints with `kubectl describe`. | ✅ |
 | 11 | [Namespace Management & Resource Quota Enforcement](03-Kubernetes/Lab11-Namespaces) | Create the `ivolve` namespace, apply a `ResourceQuota` limiting the namespace to **2 Pods**, and verify namespace resource governance. | ✅ |
@@ -245,17 +245,17 @@ Status legend: ✅ Completed · 🚧 In Progress · ⬜ Planned
 
 ### 04 · Jenkins (CI/CD)
 
-| Lab | Title | Summary | Status |
+| Lab | Title <img width=250/> | Summary <img width=550/> | Status |
 |:---:|-------|---------|:------:|
 | 21 | [Role-Based Authorization](04-Jenkins/Lab21-Role-Based-Authorization) | Configure admin and read-only users with Jenkins RBAC. | ✅ |
 | 22 | [CI/CD Pipeline](04-Jenkins/Lab22-CI-CD-Pipeline) | Test → build → image → push → update manifest → deploy to Kubernetes, with post actions. | ✅ |
-| 23 | Agents & Shared Libraries | Reuse pipeline logic across jobs via a shared library on a Jenkins agent. | ⬜ |
+| 23 | [Agents & Shared Libraries](04-Jenkins/Lab23-Jenkins-Shared-Library) | Reuse pipeline logic across jobs via a shared library on a Jenkins agent. | ✅ |
 
 <a id="05--argocd-gitops"></a>
 
 ### 05 · ArgoCD (GitOps)
 
-| Lab | Title | Summary | Status |
+| Lab | Title <img width=250/> | Summary <img width=550/> | Status |
 |:---:|-------|---------|:------:|
 | 25 | GitOps Workflow | CI builds and pushes an image, commits the updated manifest, and ArgoCD auto-syncs it. | ⬜ |
 
@@ -265,7 +265,7 @@ Status legend: ✅ Completed · 🚧 In Progress · ⬜ Planned
 
 ### 06 · Ansible
 
-| Lab | Title | Summary | Status |
+| Lab | Title <img width=250/> | Summary <img width=550/> | Status |
 |:---:|-------|---------|:------:|
 | 26 | Initial Configuration | Set up Ansible, exchange SSH keys, build inventory, and run ad-hoc commands. | ⬜ |
 | 27 | Playbooks | Automate Nginx installation and a custom web page on a managed node. | ⬜ |
@@ -274,10 +274,10 @@ Status legend: ✅ Completed · 🚧 In Progress · ⬜ Planned
 | 30 | Dynamic Inventory | Auto-discover tagged AWS EC2 hosts and run the MySQL role against them. | ⬜ |
 
 
-**22 of 30 labs complete**
+**23 of 30 labs complete**
 
 ```text
-██████████████████████░░░░░░░░ 73.3%
+███████████████████████░░░░░░░ 76.6%
 ```
 
 ---

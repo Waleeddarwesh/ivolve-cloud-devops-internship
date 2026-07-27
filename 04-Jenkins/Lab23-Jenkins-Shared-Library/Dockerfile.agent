@@ -1,0 +1,22 @@
+FROM jenkins/inbound-agent:jdk21
+
+USER root
+
+# Install Maven, Docker CLI, and prerequisites
+RUN apt-get update && \
+    apt-get install -y maven docker.io curl
+
+# Installing maven via apt pulls in Java 17 and overrides the default java path.
+# We MUST reset the java path back to the Java 21 version provided by the base image.
+RUN ln -sf /opt/java/openjdk/bin/java /usr/bin/java
+
+# Download and install the latest stable kubectl
+RUN curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl" && \
+    chmod +x kubectl && \
+    mv kubectl /usr/local/bin/
+
+# Ensure the jenkins user has permission to use docker socket
+RUN groupadd -f docker && usermod -aG docker jenkins
+
+# Switch back to the jenkins user for inbound-agent operations
+USER jenkins

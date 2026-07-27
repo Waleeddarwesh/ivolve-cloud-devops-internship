@@ -28,6 +28,7 @@ Lab22-Jenkins-CI-CD-Pipeline/
 ├── Dockerfile
 ├── Dockerfile.jenkins
 ├── Jenkinsfile
+├── pom.xml
 ├── README.md
 ├── manifests/
 │   ├── deployment.yaml
