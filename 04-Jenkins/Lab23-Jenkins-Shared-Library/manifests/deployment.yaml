@@ -19,11 +19,13 @@ spec:
         app: jenkins-app
 
     spec:
+      imagePullSecrets:
+        - name: dockerhub-secret
       containers:
         - name: jenkins-app
 
           # Jenkins replaces this value using sed
-          image: PLACEHOLDER_IMAGE
+          image: waleeddarwesh/jenkins-app:9
 
           imagePullPolicy: Always
 

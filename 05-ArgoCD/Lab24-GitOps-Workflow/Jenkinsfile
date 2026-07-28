@@ -1,0 +1,55 @@
+@Library('shared-library') _
+
+pipeline {
+    agent {
+        label 'devops-agent'
+    }
+
+    stages {
+
+        stage('BuildApp') {
+            steps {
+                buildApp(
+                    workingDir: '04-Jenkins/Lab23-Jenkins-Shared-Library'
+                )
+            }
+        }
+
+        stage('BuildImage') {
+            steps {
+                buildImage(
+                    workingDir: '04-Jenkins/Lab23-Jenkins-Shared-Library',
+                    imageName: 'waleeddarwesh/jenkins-app',
+                    dockerCredentialsId: 'dockerhub'
+                )
+            }
+        }
+
+        stage('Update GitOps Repository') {
+            steps {
+                updateGitOpsRepo(
+                    workingDir: '04-Jenkins/Lab23-Jenkins-Shared-Library',
+                    manifestPath: 'manifests/deployment.yaml',
+                    imageName: 'waleeddarwesh/jenkins-app',
+                    githubCredentialsId: 'GitHub'
+                )
+            }
+        }
+    }
+
+    post {
+        always {
+            echo 'Pipeline execution completed.'
+            cleanWs()
+        }
+
+        success {
+            echo 'GitOps repository updated successfully.'
+            echo 'ArgoCD will automatically synchronize the new application version to Kubernetes.'
+        }
+
+        failure {
+            echo 'Pipeline execution failed.'
+        }
+    }
+}

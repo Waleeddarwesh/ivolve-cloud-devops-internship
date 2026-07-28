@@ -4,7 +4,7 @@
 
 **A hands-on portfolio of labs, assignments, and projects completed during the Cloud DevOps internship at iVolve Technologies.**
 
-![Progress](https://img.shields.io/badge/Progress-23%2F30_Labs-blue?style=flat-square)
+![Progress](https://img.shields.io/badge/Progress-24%2F29_Labs-blue?style=flat-square)
 ![Status](https://img.shields.io/badge/Status-In_Progress-success?style=flat-square)
 ![Focus](https://img.shields.io/badge/Focus-Cloud_%26_DevOps-orange?style=flat-square)
 ![Last Commit](https://img.shields.io/github/last-commit/WaleedDarwesh/ivolve-cloud-devops-internship?style=flat-square)
@@ -40,7 +40,7 @@
 
 ## 📖 Overview
 
-This repository documents my learning journey through the **Cloud DevOps internship** at **iVolve Technologies** — a structured, hands-on curriculum of **30 labs** spanning the modern DevOps toolchain.
+This repository documents my learning journey through the **Cloud DevOps internship** at **iVolve Technologies** — a structured, hands-on curriculum of **29 labs** spanning the modern DevOps toolchain.
 
 The program moves progressively from **build automation** through **containerization**, **orchestration**, **CI/CD**, **GitOps**, and **configuration management**, culminating in cloud-native deployment on AWS. Each lab captures real, reproducible implementations — manifests, Dockerfiles, pipelines, scripts, screenshots, and lessons learned.
 
@@ -175,14 +175,14 @@ ivolve-cloud-devops-internship/
 │   └── Lab23-Jenkins-Shared-Library/
 │
 ├── 05-ArgoCD/
-│   └── Lab25-GitOps-Workflow/
+│   └── Lab24-GitOps-Workflow/
 │
 ├── 06-Ansible/
-│   ├── Lab26-Initial-Configuration/
-│   ├── Lab27-Playbooks/
-│   ├── Lab28-Roles/
-│   ├── Lab29-Vault/
-│   └── Lab30-Dynamic-Inventory/
+│   ├── Lab25-Initial-Configuration/
+│   ├── Lab26-Playbooks/
+│   ├── Lab27-Roles/
+│   ├── Lab28-Vault/
+│   └── Lab29-Dynamic-Inventory/
 │
 ├── Assets/
 │   └── Images/
@@ -257,9 +257,7 @@ Status legend: ✅ Completed · 🚧 In Progress · ⬜ Planned
 
 | Lab | Title <img width=250/> | Summary <img width=550/> | Status |
 |:---:|-------|---------|:------:|
-| 25 | GitOps Workflow | CI builds and pushes an image, commits the updated manifest, and ArgoCD auto-syncs it. | ⬜ |
-
-> ℹ️ Lab 24 is intentionally omitted from the program's numbering.
+| 24 | [GitOps Workflow](05-ArgoCD/Lab24-GitOps-Workflow) | CI builds and pushes an image, commits the updated manifest, and ArgoCD auto-syncs it. | ✅ |
 
 <a id="06--ansible"></a>
 
@@ -267,17 +265,17 @@ Status legend: ✅ Completed · 🚧 In Progress · ⬜ Planned
 
 | Lab | Title <img width=250/> | Summary <img width=550/> | Status |
 |:---:|-------|---------|:------:|
-| 26 | Initial Configuration | Set up Ansible, exchange SSH keys, build inventory, and run ad-hoc commands. | ⬜ |
-| 27 | Playbooks | Automate Nginx installation and a custom web page on a managed node. | ⬜ |
-| 28 | Roles | Structure reusable roles for Docker, `kubectl`, and Jenkins. | ⬜ |
-| 29 | Vault | Provision MySQL with an `ivolve` DB and user, securing secrets with Ansible Vault. | ⬜ |
-| 30 | Dynamic Inventory | Auto-discover tagged AWS EC2 hosts and run the MySQL role against them. | ⬜ |
+| 25 | Initial Configuration | Set up Ansible, exchange SSH keys, build inventory, and run ad-hoc commands. | ⬜ |
+| 26 | Playbooks | Automate Nginx installation and a custom web page on a managed node. | ⬜ |
+| 27 | Roles | Structure reusable roles for Docker, `kubectl`, and Jenkins. | ⬜ |
+| 28 | Vault | Provision MySQL with an `ivolve` DB and user, securing secrets with Ansible Vault. | ⬜ |
+| 29 | Dynamic Inventory | Auto-discover tagged AWS EC2 hosts and run the MySQL role against them. | ⬜ |
 
 
-**23 of 30 labs complete**
+**24 of 29 labs complete**
 
 ```text
-███████████████████████░░░░░░░ 76.6%
+████████████████████████░░░░░░ 82.8%
 ```
 
 ---
