@@ -1,0 +1,9 @@
+---
+- name: Configure DevOps Tools on Managed Nodes
+  hosts: managed
+  become: true
+
+  roles:
+    - docker
+    - kubectl
+    - jenkins

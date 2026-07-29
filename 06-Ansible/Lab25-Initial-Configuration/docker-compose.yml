@@ -1,0 +1,27 @@
+services:
+  control-node:
+    build: ./control-node
+    container_name: ansible-control
+    hostname: control
+    networks:
+      - ansible-net
+    volumes:
+      - ansible-data:/ansible-lab
+    stdin_open: true
+    tty: true
+
+  managed-node:
+    build: ./managed-node
+    container_name: ansible-managed
+    hostname: managed
+    networks:
+      - ansible-net
+    ports:
+      - "8080:80"
+
+networks:
+  ansible-net:
+    driver: bridge
+
+volumes:
+  ansible-data:

@@ -4,7 +4,7 @@
 
 **A hands-on portfolio of labs, assignments, and projects completed during the Cloud DevOps internship at iVolve Technologies.**
 
-![Progress](https://img.shields.io/badge/Progress-24%2F29_Labs-blue?style=flat-square)
+![Progress](https://img.shields.io/badge/Progress-27%2F29_Labs-blue?style=flat-square)
 ![Status](https://img.shields.io/badge/Status-In_Progress-success?style=flat-square)
 ![Focus](https://img.shields.io/badge/Focus-Cloud_%26_DevOps-orange?style=flat-square)
 ![Last Commit](https://img.shields.io/github/last-commit/WaleedDarwesh/ivolve-cloud-devops-internship?style=flat-square)
@@ -265,17 +265,17 @@ Status legend: ✅ Completed · 🚧 In Progress · ⬜ Planned
 
 | Lab | Title <img width=250/> | Summary <img width=550/> | Status |
 |:---:|-------|---------|:------:|
-| 25 | Initial Configuration | Set up Ansible, exchange SSH keys, build inventory, and run ad-hoc commands. | ⬜ |
-| 26 | Playbooks | Automate Nginx installation and a custom web page on a managed node. | ⬜ |
-| 27 | Roles | Structure reusable roles for Docker, `kubectl`, and Jenkins. | ⬜ |
+| 25 | [Initial Configuration](06-Ansible/Lab25-Initial-Configuration) | Set up Ansible, exchange SSH keys, build inventory, and run ad-hoc commands. | ✅ |
+| 26 | [Playbooks](06-Ansible/Lab26-Playbooks) | Automate Nginx installation and a custom web page on a managed node. | ✅ |
+| 27 | [Roles](06-Ansible/Lab27-Roles) | Structure reusable roles for Docker, `kubectl`, and Jenkins. | ✅ |
 | 28 | Vault | Provision MySQL with an `ivolve` DB and user, securing secrets with Ansible Vault. | ⬜ |
 | 29 | Dynamic Inventory | Auto-discover tagged AWS EC2 hosts and run the MySQL role against them. | ⬜ |
 
 
-**24 of 29 labs complete**
+**27 of 29 labs complete**
 
 ```text
-████████████████████████░░░░░░ 82.8%
+███████████████████████████░░░ 93.1%
 ```
 
 ---

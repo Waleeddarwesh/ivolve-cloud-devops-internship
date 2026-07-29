@@ -192,7 +192,6 @@ Ensure the following are available before starting:
 - Maven installed
 - Docker Hub account
 - GitHub repository
-- ArgoCD installed
 
 ---
 
@@ -607,6 +606,8 @@ After completing this lab, you will be able to:
 ---
 
 ## 🧹 Cleanup
+
+> **Note:** **Do not perform these cleanup steps if you plan to use this ArgoCD environment for subsequent labs.** Removing the application or images now will require you to rebuild them later.
 
 Delete the application:
 
