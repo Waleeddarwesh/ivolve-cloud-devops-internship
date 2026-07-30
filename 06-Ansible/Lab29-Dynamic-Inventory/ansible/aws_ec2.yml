@@ -1,0 +1,30 @@
+---
+plugin: amazon.aws.aws_ec2
+
+# AWS regions to query
+regions:
+  - us-east-1
+
+# Only discover running instances with the service:db tag
+filters:
+  tag:service: db
+  instance-state-name: running
+
+# Group instances by their tags
+keyed_groups:
+  - key: tags.service
+    prefix: tag_service
+    separator: "_"
+  - key: tags.env
+    prefix: tag_env
+    separator: "_"
+
+# Use the public IP to connect
+hostnames:
+  - ip-address
+
+# Compose additional host variables
+compose:
+  ansible_host: public_ip_address
+  ansible_user: "'ubuntu'"
+  ansible_ssh_private_key_file: "'~/.ssh/ivolve-key.pem'"

@@ -393,7 +393,7 @@ ansible-galaxy init roles/jenkins
   service:
     name: jenkins
     state: started
-    enabled: yes
+    enabled: true
 ```
 
 > **What this role does:** Installs Java 21 (a Jenkins requirement), adds the official Jenkins repository, installs Jenkins, and uses a handler to start and enable the Jenkins service when the installation changes.

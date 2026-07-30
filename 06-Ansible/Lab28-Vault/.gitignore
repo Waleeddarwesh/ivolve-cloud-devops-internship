@@ -1,0 +1,5 @@
+# Ignore the vault password file
+vault_pass.txt
+
+# Ignore Ansible retry files
+*.retry

@@ -1,0 +1,7 @@
+---
+- name: Secure MySQL Setup with Ansible Vault
+  hosts: managed_nodes
+  become: yes
+
+  roles:
+    - mysql

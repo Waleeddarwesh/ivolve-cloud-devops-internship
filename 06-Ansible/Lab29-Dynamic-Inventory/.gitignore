@@ -1,0 +1,10 @@
+# Terraform
+.terraform/
+.terraform.lock.hcl
+.terraform.tfstate.lock.info
+
+# Ansible
+vault_pass.txt
+*.pem
+*.retry
+.ansible/

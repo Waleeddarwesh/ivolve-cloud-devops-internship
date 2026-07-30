@@ -1,0 +1,4 @@
+---
+mysql_db_name: ivolve
+mysql_db_user: ivolve_user
+mysql_bind_address: "0.0.0.0"

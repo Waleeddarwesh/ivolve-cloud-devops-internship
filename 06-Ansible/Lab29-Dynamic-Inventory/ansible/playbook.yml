@@ -1,0 +1,7 @@
+---
+- name: Configure MySQL on Dynamically Discovered DB Servers
+  hosts: tag_service_db
+  become: true
+
+  roles:
+    - mysql

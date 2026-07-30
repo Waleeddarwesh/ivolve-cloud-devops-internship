@@ -4,8 +4,8 @@
 
 **A hands-on portfolio of labs, assignments, and projects completed during the Cloud DevOps internship at iVolve Technologies.**
 
-![Progress](https://img.shields.io/badge/Progress-27%2F29_Labs-blue?style=flat-square)
-![Status](https://img.shields.io/badge/Status-In_Progress-success?style=flat-square)
+![Progress](https://img.shields.io/badge/Progress-29%2F29_Labs-blue?style=flat-square)
+![Status](https://img.shields.io/badge/Status-Completed-success?style=flat-square)
 ![Focus](https://img.shields.io/badge/Focus-Cloud_%26_DevOps-orange?style=flat-square)
 ![Last Commit](https://img.shields.io/github/last-commit/WaleedDarwesh/ivolve-cloud-devops-internship?style=flat-square)
 ![Repo Size](https://img.shields.io/github/repo-size/WaleedDarwesh/ivolve-cloud-devops-internship?style=flat-square)
@@ -69,7 +69,7 @@ flowchart TD
 
 ## 🧭 Internship Overview
 
-The internship follows a progressive, project-based curriculum that builds skills layer by layer — from packaging an application, to shipping it in a container, to orchestrating, automating, and continuously delivering it. The **30 labs** are grouped into **six hands-on tracks**:
+The internship follows a progressive, project-based curriculum that builds skills layer by layer — from packaging an application, to shipping it in a container, to orchestrating, automating, and continuously delivering it. The **29 labs** are grouped into **six hands-on tracks**:
 
 | # | Track | What It Covers | Labs |
 |:-:|-------|----------------|:----:|
@@ -79,8 +79,6 @@ The internship follows a progressive, project-based curriculum that builds skill
 | 04 | ⚙️ **Jenkins** | CI/CD pipelines, agents, and shared libraries | 3 |
 | 05 | 🔄 **ArgoCD** | GitOps-driven continuous delivery workflows | 1 |
 | 06 | 🤖 **Ansible** | Linux automation and configuration management | 5 |
-
-> 📅 **Timeline:** Started July 2026 · 🚀 In Progress
 
 ---
 
@@ -184,9 +182,6 @@ ivolve-cloud-devops-internship/
 │   ├── Lab28-Vault/
 │   └── Lab29-Dynamic-Inventory/
 │
-├── Assets/
-│   └── Images/
-│
 └── README.md
 ```
 
@@ -268,14 +263,14 @@ Status legend: ✅ Completed · 🚧 In Progress · ⬜ Planned
 | 25 | [Initial Configuration](06-Ansible/Lab25-Initial-Configuration) | Set up Ansible, exchange SSH keys, build inventory, and run ad-hoc commands. | ✅ |
 | 26 | [Playbooks](06-Ansible/Lab26-Playbooks) | Automate Nginx installation and a custom web page on a managed node. | ✅ |
 | 27 | [Roles](06-Ansible/Lab27-Roles) | Structure reusable roles for Docker, `kubectl`, and Jenkins. | ✅ |
-| 28 | Vault | Provision MySQL with an `ivolve` DB and user, securing secrets with Ansible Vault. | ⬜ |
-| 29 | Dynamic Inventory | Auto-discover tagged AWS EC2 hosts and run the MySQL role against them. | ⬜ |
+| 28 | [Vault](06-Ansible/Lab28-Vault) | Create a reusable MySQL role to provision databases and users, fully securing credentials at runtime with **Ansible Vault**. | ✅ |
+| 29 | [Dynamic Inventory](06-Ansible/Lab29-Dynamic-Inventory) | Provision **AWS EC2** using **Terraform**, then use the `aws_ec2` plugin to auto-discover and configure the cloud infrastructure. | ✅ |
 
 
-**27 of 29 labs complete**
+**29 of 29 labs complete**
 
 ```text
-███████████████████████████░░░ 93.1%
+██████████████████████████████ 100%
 ```
 
 ---
@@ -322,8 +317,6 @@ This repository serves as:
 ---
 
 <div align="center">
-
-⭐ **If you find this repository helpful, consider giving it a star.** ⭐
 
 _Thank you for visiting my Cloud DevOps internship repository!_
 

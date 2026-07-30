@@ -1,0 +1,97 @@
+---
+# Load vault-encrypted variables
+- name: Include vault-encrypted variables
+  include_vars:
+    file: vault.yml
+
+- name: Install MySQL and dependencies
+  apt:
+    name:
+      - mysql-server
+      - mysql-client
+      - python3-pymysql
+    state: present
+    update_cache: true
+
+- name: Ensure MySQL run directory exists
+  file:
+    path: /var/run/mysqld
+    state: directory
+    owner: mysql
+    group: mysql
+    mode: '0755'
+
+- name: Start MySQL service
+  shell: "service mysql start"
+  register: mysql_start
+  changed_when: "'Starting' in mysql_start.stdout"
+
+- name: Wait for MySQL socket to be ready
+  wait_for:
+    path: /var/run/mysqld/mysqld.sock
+    state: present
+    timeout: 30
+
+- name: Set MySQL root password
+  mysql_user:
+    name: root
+    password: "{{ vault_mysql_root_password }}"
+    host: localhost
+    login_user: root
+    login_password: "{{ vault_mysql_root_password }}"
+    check_implicit_admin: yes
+    login_unix_socket: /var/run/mysqld/mysqld.sock
+    state: present
+
+- name: Create iVolve database
+  mysql_db:
+    name: "{{ mysql_db_name }}"
+    state: present
+    login_user: root
+    login_password: "{{ vault_mysql_root_password }}"
+    login_unix_socket: /var/run/mysqld/mysqld.sock
+  register: db_creation
+
+- name: Display database creation result
+  debug:
+    msg: "✅ Database '{{ mysql_db_name }}' created successfully!"
+  when: db_creation.changed
+
+- name: Create iVolve database user with all privileges
+  mysql_user:
+    name: "{{ mysql_db_user }}"
+    password: "{{ vault_mysql_user_password }}"
+    priv: "{{ mysql_db_name }}.*:ALL"
+    host: "%"
+    state: present
+    login_user: root
+    login_password: "{{ vault_mysql_root_password }}"
+    login_unix_socket: /var/run/mysqld/mysqld.sock
+  register: user_creation
+
+- name: Display user creation result
+  debug:
+    msg: "✅ User '{{ mysql_db_user }}' created with ALL privileges on '{{ mysql_db_name }}' database!"
+  when: user_creation.changed
+
+- name: Flush MySQL privileges
+  command: mysql -u root -p{{ vault_mysql_root_password }} -e "FLUSH PRIVILEGES;"
+  changed_when: false
+
+- name: Validate - Connect as ivolve_user and list databases
+  command: >
+    mysql -u {{ mysql_db_user }} -p{{ vault_mysql_user_password }} -e "SHOW DATABASES;"
+  register: db_validation
+  changed_when: false
+
+- name: Display validation result
+  debug:
+    msg: 
+      - "=========================================="
+      - "🔐 MySQL Setup Complete & Validated!"
+      - "📦 Database: {{ mysql_db_name }}"
+      - "👤 User: {{ mysql_db_user }}"
+      - "🔑 Password: (Vault-encrypted)"
+      - "=========================================="
+      - "📋 Databases visible to {{ mysql_db_user }}:"
+      - "{{ db_validation.stdout_lines }}"
